@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Notifications</title>
+    <style>
+      section {
+        padding-left: 18px;
+        /*padding-top: 5px;*/
+        margin-bottom: 5px;
+      }
+      section h3 {
+        margin-left: -18px;
+      }
+      input[type='text'] {
+        width: 350px;
+      }
+      span.description {
+        font-style: italic;
+        color: grey;
+      }
+      button {
+
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h3>API Access</h3>
+      <label for="access-token">Access Token</label>
+      <input type="text" id="access-token">
+      <span class="description"><a href="https://github.com/settings/tokens/new?scopes=notifications&description=Notifier for GitHub Chrome extension" target="gh_target">create a token</a> with the <strong>notifications</strong> permission and paste it here.</span><br />
+    </section>
+    <section>
+      <h3>Participating Only</h3>
+      <input type="checkbox" id="only-participating">
+      <label for="only-participating">Only show notifications that I am participating in.</label>
+    </section>
+
+    <script src="api.js"></script>
+    <script src="options.js"></script>
+
+    <section>
+      <button class="">Save</button>
+      <button>Cancel</button>
+    </section>
+  </body>
+</html>

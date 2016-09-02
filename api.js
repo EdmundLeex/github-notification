@@ -4,7 +4,7 @@
   function init() {
     const defaults = {
       baseUrl: 'https://api.github.com/notifications',
-      accessToken: 'b2957b8c193e9dcf608c8ec40a0e3afcd59564e3',
+      accessToken: '70e3bdc65cd6009a413bbd2dbcdba27aff565aaa',
       onlyParticipating: true,
       interval: 1
     };
