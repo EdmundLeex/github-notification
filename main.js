@@ -7,12 +7,16 @@
     // chrome.browserAction.setTitle({title});
   }
 
-  function update() {
+  function updateCache(callback) {
     GitHubNotifications.getNotifications(() => {
-      const count = GitHubNotifications.cache.get('count');
-      console.log('updating');
-      render(count);
+      if (callback !== undefined && callback.constructor === Function) { callback() };
+      console.log('updatingCache');
     });
+  }
+
+  function updateView() {
+    const count = getDataFromCache('count');
+    render(count);
   }
 
   function scheduleUpdate(period) {
@@ -20,8 +24,18 @@
       periodInMinutes: period
     });
 
-    chrome.alarms.onAlarm.addListener(update);
+    chrome.alarms.onAlarm.addListener(updateCache);
+    chrome.alarms.onAlarm.addListener(updateView);
   }
 
-  scheduleUpdate(GitHubNotifications.settings.get('interval'));
+  function getDataFromCache(item) {
+    return GitHubNotifications.cache.get('count');
+  }
+
+  function init() {
+    scheduleUpdate(GitHubNotifications.settings.get('interval'));
+    updateCache(updateView);
+  }
+
+  init();
 })();

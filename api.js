@@ -45,7 +45,7 @@
     const query = GitHubNotifications.queryString().join('&');
     const url = `${GitHubNotifications.settings.get('baseUrl')}?${query}`;
 
-    GitHubNotifications.request(url).then(response => {
+    return GitHubNotifications.request(url).then(response => {
       response.json().then(notifications => {
         GitHubNotifications.cache.set('count', notifications.length);
         callback();
