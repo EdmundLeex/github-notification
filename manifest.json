@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "GitHub Notifications",
+  "version": "0.1.0",
+  "description": "Displays your GitHub notifications",
+  // "homepage_url": "#",
+  "minimum_chrome_version": "46",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "alarms"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "api.js",
+      "main.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "icon.png"
+    },
+    "default_title": "GitHub Notifications",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "popup.html",
+    "chrome_style": true
+  }
+}
