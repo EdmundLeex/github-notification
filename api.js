@@ -4,15 +4,20 @@
   function init() {
     const defaults = {
       baseUrl: 'https://api.github.com/notifications',
-      accessToken: '70e3bdc65cd6009a413bbd2dbcdba27aff565aaa',
+      accessToken: '',
       onlyParticipating: true,
       interval: 1
     };
 
     const settings = {
       get: name => {
-        const isDefault = defaults.hasOwnProperty(name);
-        return isDefault ? defaults[name] : localStorage.getItem(name);
+        const isSet = localStorage.hasOwnProperty(name);
+        let value = isSet ? localStorage.getItem(name) : defaults[name];
+        if (value === 'true' || value === 'false') {
+          return value === 'true';
+        } else {
+          return value;
+        }
       },
       set:    localStorage.setItem.bind(localStorage),
       remove: localStorage.removeItem.bind(localStorage),
