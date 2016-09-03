@@ -6,7 +6,7 @@
   // "homepage_url": "#",
   "minimum_chrome_version": "46",
   "icons": {
-    "128": "icon.png"
+    "128": "icon-lg.png"
   },
   "permissions": [
     "alarms"
@@ -19,7 +19,8 @@
     "persistent": false,
     "scripts": [
       "api.js",
-      "main.js"
+      "main.js",
+      "view.js"
     ]
   },
   "browser_action": {

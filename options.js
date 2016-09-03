@@ -14,6 +14,21 @@
       formOnlyParticipating.checked = GitHubNotifications.settings.get('onlyParticipating');
     }
 
+    // these should be extracted to a view mixin
+    // *****************************************
+    function updateView() {
+      const count = getDataFromCache('count');
+      if (count === '0') { count = ''; }
+      render(count);
+    }
+
+    function render(text) {
+      chrome.browserAction.setBadgeText({text: text});
+      // chrome.browserAction.setBadgeBackgroundColor({color});
+      // chrome.browserAction.setTitle({title});
+    }
+    // *****************************************
+
     showSettings();
 
     formSettings.addEventListener('submit', (e) => {
@@ -25,6 +40,7 @@
       GitHubNotifications.settings.set('accessToken', token);
       GitHubNotifications.settings.set('onlyParticipating', onlyParticipating);
 
+      updateView();
       self.close();
     });
 

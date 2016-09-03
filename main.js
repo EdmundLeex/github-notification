@@ -1,6 +1,10 @@
 (() => {
   'use strict';
 
+  if (window.GitHubNotifications === undefined) {
+    window.GitHubNotifications = {};
+  }
+
   function render(text) {
     chrome.browserAction.setBadgeText({text: text});
     // chrome.browserAction.setBadgeBackgroundColor({color});
@@ -9,7 +13,9 @@
 
   function updateCache(callback) {
     GitHubNotifications.getNotifications(() => {
-      if (callback !== undefined && callback.constructor === Function) { callback() };
+      if (callback !== undefined && callback.constructor === Function) {
+        callback()
+      };
       console.log('updatingCache');
     });
   }

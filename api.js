@@ -1,6 +1,10 @@
 (() => {
   'use strict';
 
+  if (window.GitHubNotifications === undefined) {
+    window.GitHubNotifications = {};
+  }
+
   function init() {
     const defaults = {
       baseUrl: 'https://api.github.com/notifications',
@@ -48,6 +52,7 @@
     return GitHubNotifications.request(url).then(response => {
       response.json().then(notifications => {
         GitHubNotifications.cache.set('count', notifications.length);
+        GitHubNotifications.cache.set('notifications', JSON.stringify(notifications));
         callback();
       });
     });
