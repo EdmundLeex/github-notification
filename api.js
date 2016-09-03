@@ -28,11 +28,7 @@
       reset:  localStorage.clear.bind(localStorage)
     };
 
-    const cache = {
-      get:    sessionStorage.getItem.bind(sessionStorage),
-      set:    sessionStorage.setItem.bind(sessionStorage),
-      remove: sessionStorage.removeItem.bind(sessionStorage),
-      reset:  sessionStorage.clear.bind(sessionStorage)
+    let cache = {
     };
 
     const api = {
@@ -51,8 +47,8 @@
 
     return GitHubNotifications.request(url).then(response => {
       response.json().then(notifications => {
-        GitHubNotifications.cache.set('count', notifications.length);
-        GitHubNotifications.cache.set('notifications', JSON.stringify(notifications));
+        GitHubNotifications.cache.count = notifications.length;
+        GitHubNotifications.cache.notifications = notifications;
         callback();
       });
     });
