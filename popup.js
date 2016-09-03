@@ -6,9 +6,15 @@
     const divNotifications = document.getElementById('notifications');
     
     notifications.forEach(notification => {
+      let itemDiv = document.createElement('div');
+      itemDiv.classList.add('row');
+
       let titleDiv = document.createElement('div');
+      titleDiv.classList.add('title');
       titleDiv.textContent = notification.subject.title;
-      divNotifications.appendChild(titleDiv);
+
+      itemDiv.appendChild(titleDiv);
+      divNotifications.appendChild(itemDiv);
     });
   }
 
