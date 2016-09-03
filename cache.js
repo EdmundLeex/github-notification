@@ -7,7 +7,7 @@
 
   let GitHubNotifications = window.GitHubNotifications;
 
-  const Cache = (() => {
+  const AppCache = (() => {
     var instance;
 
     function init() {
@@ -24,5 +24,5 @@
     }
   })();
 
-  GitHubNotifications.Cache = Cache.getInstance();
+  GitHubNotifications.AppCache = AppCache.getInstance();
 })();
