@@ -28,8 +28,7 @@
       reset:  localStorage.clear.bind(localStorage)
     };
 
-    let cache = {
-    };
+    let cache = {};
 
     const api = {
       settings: settings,
