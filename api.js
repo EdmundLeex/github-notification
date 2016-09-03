@@ -62,16 +62,16 @@
   };
 
   GitHubNotifications.request = url => {
-      const token = GitHubNotifications.settings.get('accessToken');
-      if (!token) {
-        return Promise.reject(new Error('missing token'));
-      }
+    const token = GitHubNotifications.settings.get('accessToken');
+    if (!token) {
+      return Promise.reject(new Error('missing token'));
+    }
 
-      const headers = Object.assign({
-        Authorization: `token ${token}`,
-        'If-Modified-Since': ''
-      });
+    const headers = Object.assign({
+      Authorization: `token ${token}`,
+      'If-Modified-Since': ''
+    });
 
-      return fetch(url, {headers});
-    };
+    return fetch(url, {headers});
+  };
 })();

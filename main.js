@@ -16,6 +16,7 @@
 
   function updateView() {
     const count = getDataFromCache('count');
+    if (count === '0') { count = ''; }
     render(count);
   }
 
