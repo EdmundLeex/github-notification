@@ -1,5 +1,13 @@
 (() => {
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
+  const divContainer = document.getElementById('container');
+  // const spinnerDiv = document.createElement('div');
+  const spinner = document.createElement('img');
+  spinner.classList.add('spinner');
+  spinner.src = 'loading.gif';
+  // spinnerDiv.appendChild(spinner);
+
+  let appCache = GitHubNotifications.AppCache;
 
   function createNotificationNode(notification) {
     let itemDiv = document.createElement('div');
@@ -15,8 +23,8 @@
   }
 
   function renderPopup() {
-    const notifications = GitHubNotifications.cache.notifications;
-    const divNotifications = document.getElementById('notifications');
+    const divNotifications = document.createElement('div');
+    const notifications = appCache.notifications;
     
     if (notifications) {
       renderNotifications(notifications);
@@ -30,10 +38,17 @@
       let itemDiv = createNotificationNode(notification);
       divNotifications.appendChild(itemDiv);
     });
+    divContainer.innerHTML = '';
+    divContainer.appendChild(divNotifications);
   }
 
   function renderSpinner() {
-    
+    divContainer.innerHTML = '';
+    divContainer.appendChild(spinner);
+  }
+
+  function renderError() {
+
   }
 
   document.addEventListener('DOMContentLoaded', function() {
