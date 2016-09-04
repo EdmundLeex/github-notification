@@ -3,6 +3,7 @@
   const AppCache = GitHubNotifications.AppCache;
   const Util     = GitHubNotifications.Util;
   const Badge    = GitHubNotifications.Badge;
+  const Settings = GitHubNotifications.Settings;
 
   const divContainer = document.getElementById('container');
   const spinner = document.createElement('img');
@@ -14,7 +15,17 @@
 
     const notifications = AppCache.notifications;
 
-    if (notifications) {
+    if (Settings.get('accessToken') === '') {
+      const divTitle = document.createElement('div');
+      const link = document.createElement('a');
+      link.text = 'Settings';
+      link.classList.add('center');
+      divTitle.classList.add('center');
+      divTitle.textContent = 'Please click here to add your Github access token.';
+      divContainer.appendChild(divTitle);
+      divContainer.appendChild(link);
+      link.addEventListener('click', _openSettings);
+    } else if (notifications) {
       const groups = _groupNotifications(notifications);
       divContainer.innerHTML = '';
       divContainer.appendChild(_groupsNode(groups));
@@ -32,6 +43,15 @@
     if (e.message === 'missing token') {
       
     }
+  }
+
+  function _openSettings(e) {
+    // e.preventDefault();
+
+    const appId = Settings.get('appId');
+    const url = `chrome://extensions/?id=${appId}`;
+
+    chrome.tabs.create({'url': url});
   }
 
   function _groupsNode(groups) {
