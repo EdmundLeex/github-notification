@@ -9,6 +9,7 @@
   const AppCache = GitHubNotifications.AppCache;
   const Api = GitHubNotifications.Api;
   const Notification = GitHubNotifications.Notification;
+  const Badge = GitHubNotifications.Badge;
 
   const Util = (() => {
     var instance;
@@ -23,7 +24,7 @@
               callback();
             };
           })
-        });
+        }).catch(handleError);
       }
 
       function timeAgo(date) {
@@ -56,6 +57,10 @@
         });
 
         return notificationsArr;
+      }
+
+      function handleError() {
+        Badge.update('!');
       }
 
       return {

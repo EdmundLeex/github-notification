@@ -18,9 +18,9 @@
         chrome.browserAction.setTitle({title: `${text} unread notifications`});
       }
 
-      function update(count) {
-        if (count === '0') { count = ''; }
-        render(count);
+      function update(text) {
+        if (text === '0') { text = ''; }
+        render(text);
       }
 
       return {
