@@ -23,7 +23,6 @@
   }
 
   function renderPopup() {
-    const divNotifications = document.createElement('div');
     const notifications = appCache.notifications;
     
     if (notifications) {
@@ -34,6 +33,7 @@
   }
 
   function renderNotifications(notifications) {
+    const divNotifications = document.createElement('div');
     notifications.forEach(notification => {
       let itemDiv = createNotificationNode(notification);
       divNotifications.appendChild(itemDiv);

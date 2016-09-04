@@ -2,6 +2,10 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', () => {
+    const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
+    const Settings = GitHubNotifications.Settings;
+    const Badge    = GitHubNotifications.Badge;
+
     const formSettings = document.getElementById('form-settings');
     const btnCancel = document.getElementById('btn-cancel');
     const btnReset = document.getElementById('btn-reset');
@@ -10,24 +14,9 @@
       const formAccessToken = formSettings.elements.namedItem('access-token');
       const formOnlyParticipating = formSettings.elements.namedItem('only-participating');
 
-      formAccessToken.value = GitHubNotifications.settings.get('accessToken');
-      formOnlyParticipating.checked = GitHubNotifications.settings.get('onlyParticipating');
+      formAccessToken.value = Settings.get('accessToken');
+      formOnlyParticipating.checked = Settings.get('onlyParticipating');
     }
-
-    // these should be extracted to a view mixin
-    // *****************************************
-    function updateView() {
-      const count = getDataFromCache('count');
-      if (count === '0') { count = ''; }
-      render(count);
-    }
-
-    function render(text) {
-      chrome.browserAction.setBadgeText({text: text});
-      // chrome.browserAction.setBadgeBackgroundColor({color});
-      // chrome.browserAction.setTitle({title});
-    }
-    // *****************************************
 
     showSettings();
 
@@ -37,10 +26,10 @@
       const token = form.elements.namedItem('access-token').value;
       const onlyParticipating = form.elements.namedItem('only-participating').checked;
 
-      GitHubNotifications.settings.set('accessToken', token);
-      GitHubNotifications.settings.set('onlyParticipating', onlyParticipating);
+      Settings.set('accessToken', token);
+      Settings.set('onlyParticipating', onlyParticipating);
 
-      updateView();
+      Badge.updateBadge();
       self.close();
     });
 

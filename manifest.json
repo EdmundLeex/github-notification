@@ -18,9 +18,11 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "cache.js",
+      "badge.js",
+      "settings.js",
       "api.js",
-      "main.js",
-      "view.js"
+      "main.js"
     ]
   },
   "browser_action": {

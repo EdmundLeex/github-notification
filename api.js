@@ -15,7 +15,7 @@
         const query = queryString();
         const url = `${Settings.get('baseUrl')}?${query}`;
 
-        GitHubNotifications.request(url).then(response => {
+        request(url).then(response => {
           response.json().then(notifications => {
             AppCache.count = notifications.length;
             AppCache.notifications = notifications;

@@ -1,48 +1,39 @@
 (() => {
+
   'use strict';
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.GitHubNotifications === undefined) {
+      window.GitHubNotifications = {};
+    }
 
-  if (window.GitHubNotifications === undefined) {
-    window.GitHubNotifications = {};
-  }
+    const GitHubNotifications = window.GitHubNotifications;
+    const Badge = GitHubNotifications.Badge;
+    const Settings = GitHubNotifications.Settings;
+    const Api = GitHubNotifications.Api;
 
-  function render(text) {
-    chrome.browserAction.setBadgeText({text: text});
-    // chrome.browserAction.setBadgeBackgroundColor({color});
-    // chrome.browserAction.setTitle({title});
-  }
+    function updateCache(callback) {
+      Api.getNotifications(() => {
+        if (callback !== undefined && callback.constructor === Function) {
+          callback()
+        };
+        console.log('updatingCache');
+      });
+    }
 
-  function updateCache(callback) {
-    GitHubNotifications.getNotifications(() => {
-      if (callback !== undefined && callback.constructor === Function) {
-        callback()
-      };
-      console.log('updatingCache');
-    });
-  }
+    function scheduleUpdate(period) {
+      chrome.alarms.create({
+        periodInMinutes: period
+      });
 
-  function updateView() {
-    const count = getDataFromCache('count');
-    if (count === '0') { count = ''; }
-    render(count);
-  }
+      chrome.alarms.onAlarm.addListener(updateCache);
+      chrome.alarms.onAlarm.addListener(Badge.updateView);
+    }
 
-  function scheduleUpdate(period) {
-    chrome.alarms.create({
-      periodInMinutes: period
-    });
+    function init() {
+      scheduleUpdate(Settings.get('interval'));
+      updateCache(Badge.updateBadge);
+    }
 
-    chrome.alarms.onAlarm.addListener(updateCache);
-    chrome.alarms.onAlarm.addListener(updateView);
-  }
-
-  function getDataFromCache(item) {
-    return GitHubNotifications.cache.get('count');
-  }
-
-  function init() {
-    scheduleUpdate(GitHubNotifications.settings.get('interval'));
-    updateCache(updateView);
-  }
-
-  init();
+    init();
+  }, false);
 })();
