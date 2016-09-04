@@ -16,7 +16,7 @@
     "notifications"
   ],
   "background": {
-    "persistent": false,
+    "persistent": true,
     "scripts": [
       "notification.js",
       "cache.js",
