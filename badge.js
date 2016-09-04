@@ -14,8 +14,8 @@
     function init() {
       function render(text) {
         chrome.browserAction.setBadgeText({text: String(text)});
-        // chrome.browserAction.setBadgeBackgroundColor({color});
-        // chrome.browserAction.setTitle({title});
+        chrome.browserAction.setBadgeBackgroundColor({color: [166, 41, 41, 255]});
+        chrome.browserAction.setTitle({title: `${text} unread notifications`});
       }
 
       function update(count) {
