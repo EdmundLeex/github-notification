@@ -56,7 +56,7 @@
     const divNotifications = document.createElement('div');
     divNotifications.classList.add('notifications');
     notifications.forEach(notification => {
-      let itemDiv = _notificationItemNode(notification);
+      const itemDiv = _notificationItemNode(notification);
       divNotifications.appendChild(itemDiv);
     });
 
@@ -64,20 +64,33 @@
   }
 
   function _notificationItemNode(notification) {
-    let itemDiv = document.createElement('div');
+    const itemDiv = document.createElement('div');
     itemDiv.classList.add('row');
 
     itemDiv.appendChild(_titleNode(notification));
+    itemDiv.appendChild(_timeNode(notification));
 
     return itemDiv;
   }
 
   function _titleNode(notification) {
-    let titleDiv = document.createElement('div');
-    titleDiv.classList.add('title');
-    titleDiv.textContent = notification.title;
+    const container = document.createElement('div');
+    const titleSpan = document.createElement('span');
+    container.classList.add('title');
+    container.appendChild(titleSpan);
+    titleSpan.textContent = notification.title;
 
-    return titleDiv;
+    return container;
+  }
+
+  function _timeNode(notification) {
+    const container = document.createElement('div');
+    const timeSpan = document.createElement('span');
+    container.classList.add('time');
+    container.appendChild(timeSpan);
+    timeSpan.textContent = `${timeSince(notification.timeStamp)} ago`;
+
+    return container;
   }
 
   function _groupNotifications(notifications) {
@@ -92,6 +105,34 @@
     });
 
     return notificationsByGroup;
+  }
+
+  function timeSince(date) {
+    date = new Date(date);
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
   }
 
   document.addEventListener('DOMContentLoaded', function() {
