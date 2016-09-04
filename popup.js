@@ -2,6 +2,7 @@
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
   const AppCache = GitHubNotifications.AppCache;
   const Util     = GitHubNotifications.Util;
+  const Badge    = GitHubNotifications.Badge;
 
   const divContainer = document.getElementById('container');
   const spinner = document.createElement('img');
@@ -9,6 +10,7 @@
   spinner.src = 'loading.gif';
 
   function renderPopup() {
+    Util.updateCache(Badge.update.bind(Badge, AppCache.count));
     const notifications = AppCache.notifications;
     const groups = _groupNotifications(notifications);
     
