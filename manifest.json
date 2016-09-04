@@ -18,6 +18,7 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "notification.js",
       "cache.js",
       "badge.js",
       "settings.js",

@@ -9,22 +9,14 @@
 
   function renderPopup() {
     const notifications = appCache.notifications;
+    const groups = _groupNotifications(notifications);
     
     if (notifications) {
-      renderNotifications(notifications);
+      divContainer.innerHTML = '';
+      divContainer.appendChild(_groupsNode(groups));
     } else {
       renderSpinner();
     }
-  }
-
-  function renderNotifications(notifications) {
-    const divNotifications = document.createElement('div');
-    notifications.forEach(notification => {
-      let itemDiv = _notificationItemNode(notification);
-      divNotifications.appendChild(itemDiv);
-    });
-    divContainer.innerHTML = '';
-    divContainer.appendChild(divNotifications);
   }
 
   function renderSpinner() {
@@ -34,6 +26,41 @@
 
   function renderError() {
 
+  }
+
+  function _groupsNode(groups) {
+    const divGroups = document.createElement('div');
+
+    for (groupName in groups) {
+      const divGroup = _groupNode(groupName, groups[groupName]);
+      divGroups.appendChild(divGroup);
+    }
+
+    return divGroups;
+  }
+
+  function _groupNode(groupName, notifications) {
+    const divGroup = document.createElement('div');
+    const divTitle = document.createElement('div');
+    divGroup.classList.add('group');
+    divTitle.classList.add('group-title');
+    divTitle.textContent = groupName;
+
+    divGroup.appendChild(divTitle);
+    divGroup.appendChild(_notificationsNode(notifications));
+
+    return divGroup;
+  }
+
+  function _notificationsNode(notifications) {
+    const divNotifications = document.createElement('div');
+    divNotifications.classList.add('notifications');
+    notifications.forEach(notification => {
+      let itemDiv = _notificationItemNode(notification);
+      divNotifications.appendChild(itemDiv);
+    });
+
+    return divNotifications;
   }
 
   function _notificationItemNode(notification) {
@@ -48,9 +75,23 @@
   function _titleNode(notification) {
     let titleDiv = document.createElement('div');
     titleDiv.classList.add('title');
-    titleDiv.textContent = notification.subject.title;
+    titleDiv.textContent = notification.title;
 
     return titleDiv;
+  }
+
+  function _groupNotifications(notifications) {
+    let notificationsByGroup = {};
+    notifications.forEach(notification => {
+      const groupName = notification.fullName;
+      if (notificationsByGroup[groupName] === undefined) {
+        notificationsByGroup[groupName] = [];
+      }
+
+      notificationsByGroup[groupName].push(notification);
+    });
+
+    return notificationsByGroup;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
