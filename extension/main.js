@@ -1,6 +1,6 @@
 (() => {
-
   'use strict';
+
   document.addEventListener('DOMContentLoaded', () => {
     if (window.GitHubNotifications === undefined) {
       window.GitHubNotifications = {};

@@ -1,4 +1,6 @@
 (() => {
+  'use strict';
+
   if (window.GitHubNotifications === undefined) {
     window.GitHubNotifications = {};
   }
