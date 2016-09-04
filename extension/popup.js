@@ -10,11 +10,12 @@
   spinner.src = 'loading.gif';
 
   function renderPopup() {
-    Util.updateCache(Badge.update.bind(Badge, AppCache.count));
+    Util.updateCache(Badge.update.bind(Badge, AppCache.count, renderError));
+
     const notifications = AppCache.notifications;
-    const groups = _groupNotifications(notifications);
-    
+
     if (notifications) {
+      const groups = _groupNotifications(notifications);
       divContainer.innerHTML = '';
       divContainer.appendChild(_groupsNode(groups));
     } else {
@@ -27,8 +28,10 @@
     divContainer.appendChild(spinner);
   }
 
-  function renderError() {
-
+  function renderError(e) {
+    if (e.message === 'missing token') {
+      
+    }
   }
 
   function _groupsNode(groups) {

@@ -29,7 +29,7 @@
 
     function init() {
       scheduleUpdate(Settings.get('interval'));
-      Util.updateCache(updateBadge);
+      Util.updateCache(updateBadge, Util.handleError);
     }
 
     init();
