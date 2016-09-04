@@ -23,6 +23,7 @@
       "badge.js",
       "settings.js",
       "api.js",
+      "util.js",
       "main.js"
     ]
   },

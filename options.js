@@ -5,6 +5,8 @@
     const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
     const Settings = GitHubNotifications.Settings;
     const Badge    = GitHubNotifications.Badge;
+    const Util     = GitHubNotifications.Util;
+    const AppCache = GitHubNotifications.AppCache;
 
     const formSettings = document.getElementById('form-settings');
     const btnCancel = document.getElementById('btn-cancel');
@@ -29,7 +31,7 @@
       Settings.set('accessToken', token);
       Settings.set('onlyParticipating', onlyParticipating);
 
-      Badge.update();
+      Util.updateCache(Badge.update.bind(Badge, AppCache.count));
       self.close();
     });
 

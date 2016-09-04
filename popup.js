@@ -1,14 +1,15 @@
 (() => {
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
+  const AppCache = GitHubNotifications.AppCache;
+  const Util     = GitHubNotifications.Util;
+
   const divContainer = document.getElementById('container');
   const spinner = document.createElement('img');
   spinner.classList.add('spinner');
   spinner.src = 'loading.gif';
 
-  let appCache = GitHubNotifications.AppCache;
-
   function renderPopup() {
-    const notifications = appCache.notifications;
+    const notifications = AppCache.notifications;
     const groups = _groupNotifications(notifications);
     
     if (notifications) {
@@ -67,6 +68,7 @@
     const link = document.createElement('a');
     const itemDiv = document.createElement('div');
     link.href = notification.url;
+    link.target = '_blank';
     itemDiv.classList.add('row');
 
     link.appendChild(itemDiv);
@@ -91,7 +93,7 @@
     const timeSpan = document.createElement('span');
     container.classList.add('time');
     container.appendChild(timeSpan);
-    timeSpan.textContent = `${timeSince(notification.timeStamp)} ago`;
+    timeSpan.textContent = `${Util.timeAgo(notification.timeStamp)}`;
 
     return container;
   }
@@ -110,38 +112,7 @@
     return notificationsByGroup;
   }
 
-  function timeSince(date) {
-    date = new Date(date);
-    var seconds = Math.floor((new Date() - date) / 1000);
-
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
-        return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-        return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-        return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-        return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-        return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     renderPopup();
   });
 })();
-
-// https://github.com/WhitehawkVentures/ProductsSite/pull/817#discussion_r73454892
-// "https://api.github.com/repos/WhitehawkVentures/ProductsSite/pulls/846"
