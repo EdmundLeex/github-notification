@@ -1,11 +1,9 @@
 (() => {
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
   const divContainer = document.getElementById('container');
-  // const spinnerDiv = document.createElement('div');
   const spinner = document.createElement('img');
   spinner.classList.add('spinner');
   spinner.src = 'loading.gif';
-  // spinnerDiv.appendChild(spinner);
 
   let appCache = GitHubNotifications.AppCache;
 
