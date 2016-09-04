@@ -10,13 +10,17 @@
     const Badge = GitHubNotifications.Badge;
     const Settings = GitHubNotifications.Settings;
     const Api = GitHubNotifications.Api;
+    const AppCache = GitHubNotifications.AppCache;
 
     function updateCache(callback) {
-      Api.getNotifications(() => {
-        if (callback !== undefined && callback.constructor === Function) {
-          callback()
-        };
-        console.log('updatingCache');
+      Api.getNotifications().then(response => {
+        response.json().then(notifications => {
+          AppCache.count = notifications.length;
+          AppCache.notifications = notifications;
+          if (callback !== undefined && callback.constructor === Function) {
+            callback()
+          };
+        })
       });
     }
 
@@ -26,7 +30,7 @@
       });
 
       chrome.alarms.onAlarm.addListener(updateCache);
-      chrome.alarms.onAlarm.addListener(Badge.updateView);
+      chrome.alarms.onAlarm.addListener(Badge.updateBadge);
     }
 
     function init() {

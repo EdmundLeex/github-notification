@@ -11,17 +11,11 @@
     var instance;
 
     function init() {
-      function getNotifications(callback) {
+      function getNotifications() {
         const query = queryString();
         const url = `${Settings.get('baseUrl')}?${query}`;
 
-        request(url).then(response => {
-          response.json().then(notifications => {
-            AppCache.count = notifications.length;
-            AppCache.notifications = notifications;
-            callback();
-          });
-        });
+        return request(url);
       }
 
       function queryString() {

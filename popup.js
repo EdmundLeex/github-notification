@@ -7,19 +7,6 @@
 
   let appCache = GitHubNotifications.AppCache;
 
-  function createNotificationNode(notification) {
-    let itemDiv = document.createElement('div');
-    itemDiv.classList.add('row');
-
-    let titleDiv = document.createElement('div');
-    titleDiv.classList.add('title');
-    titleDiv.textContent = notification.subject.title;
-
-    itemDiv.appendChild(titleDiv);
-
-    return itemDiv;
-  }
-
   function renderPopup() {
     const notifications = appCache.notifications;
     
@@ -33,7 +20,7 @@
   function renderNotifications(notifications) {
     const divNotifications = document.createElement('div');
     notifications.forEach(notification => {
-      let itemDiv = createNotificationNode(notification);
+      let itemDiv = _notificationItemNode(notification);
       divNotifications.appendChild(itemDiv);
     });
     divContainer.innerHTML = '';
@@ -47,6 +34,23 @@
 
   function renderError() {
 
+  }
+
+  function _notificationItemNode(notification) {
+    let itemDiv = document.createElement('div');
+    itemDiv.classList.add('row');
+
+    itemDiv.appendChild(_titleNode(notification));
+
+    return itemDiv;
+  }
+
+  function _titleNode(notification) {
+    let titleDiv = document.createElement('div');
+    titleDiv.classList.add('title');
+    titleDiv.textContent = notification.subject.title;
+
+    return titleDiv;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
