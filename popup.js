@@ -64,13 +64,16 @@
   }
 
   function _notificationItemNode(notification) {
+    const link = document.createElement('a');
     const itemDiv = document.createElement('div');
+    link.href = notification.url;
     itemDiv.classList.add('row');
 
+    link.appendChild(itemDiv);
     itemDiv.appendChild(_titleNode(notification));
     itemDiv.appendChild(_timeNode(notification));
 
-    return itemDiv;
+    return link;
   }
 
   function _titleNode(notification) {
