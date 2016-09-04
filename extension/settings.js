@@ -18,7 +18,7 @@
         interval: 1
       };
 
-      const settings = {
+      let settings = {
         get: name => {
           const isSet = localStorage.hasOwnProperty(name);
           let value = isSet ? localStorage.getItem(name) : defaults[name];
@@ -32,6 +32,8 @@
         remove: localStorage.removeItem.bind(localStorage),
         reset:  localStorage.clear.bind(localStorage)
       };
+
+      Object.assign(settings, { defaults: defaults });
 
       return settings;
     }

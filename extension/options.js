@@ -11,11 +11,10 @@
     const formSettings = document.getElementById('form-settings');
     const btnCancel = document.getElementById('btn-cancel');
     const btnReset = document.getElementById('btn-reset');
+    const formAccessToken = formSettings.elements.namedItem('access-token');
+    const formOnlyParticipating = formSettings.elements.namedItem('only-participating');
 
     function showSettings() {
-      const formAccessToken = formSettings.elements.namedItem('access-token');
-      const formOnlyParticipating = formSettings.elements.namedItem('only-participating');
-
       formAccessToken.value = Settings.get('accessToken');
       formOnlyParticipating.checked = Settings.get('onlyParticipating');
     }
@@ -42,8 +41,14 @@
 
     btnReset.addEventListener('click', (e) => {
       e.preventDefault();
+
+      formAccessToken.value = Settings.defaults.accessToken;
+      formOnlyParticipating.checked = Settings.defaults.onlyParticipating;
+
       localStorage.clear();
-      self.close();
+      formSettings.value
+
+      Util.updateCache(Badge.update.bind(Badge, AppCache.count));
     });
   });
 })();
