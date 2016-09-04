@@ -3,7 +3,7 @@
   "name": "GitHub Notifications",
   "version": "0.1.0",
   "description": "Displays your GitHub notifications",
-  // "homepage_url": "#",
+  "homepage_url": "https://github.com/EdmundLeex/github-notification",
   "minimum_chrome_version": "46",
   "icons": {
     "128": "icon-lg.png"
