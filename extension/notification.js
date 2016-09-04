@@ -26,19 +26,9 @@
     return `${baseUrl}/${fullName}/pull/${prNumber}`;
   }
 
-  // _Notification.prototype.markRead = () => {
-  //   let self = this;
-  //   function _markRead() {
-  //     return self.url;
-  //   }
-  //   return _markRead();
-  // }
-
   const Notification = (params) => {
     return new _Notification(params);
   }
 
   GitHubNotifications.Notification = Notification;
 })();
-// https://github.com/WhitehawkVentures/ProductsSite/pull/817#discussion_r73454892
-// "https://api.github.com/repos/WhitehawkVentures/ProductsSite/pulls/846"
