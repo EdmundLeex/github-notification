@@ -19,7 +19,7 @@
       }
 
       function update(text) {
-        if (text === '0') { text = ''; }
+        if (text === 0 || text === undefined) { text = ''; }
         render(text);
       }
 
