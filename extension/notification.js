@@ -14,10 +14,6 @@
     this.repo = params.repository.name;
     this.fullName = params.repository.full_name;
     this.url = prUrl(params.subject.url, this.fullName);
-
-    this.markRead = () => {
-      console.log(this.url);
-    }
   }
 
   function prUrl(url, fullName) {
