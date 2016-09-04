@@ -18,14 +18,13 @@
         // chrome.browserAction.setTitle({title});
       }
 
-      function updateBadge() {
-        const count = String(AppCache.count);
+      function update(count) {
         if (count === '0') { count = ''; }
         render(count);
       }
 
       return {
-        updateBadge: updateBadge
+        update: update
       };
     }
 

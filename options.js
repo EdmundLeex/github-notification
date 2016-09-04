@@ -29,7 +29,7 @@
       Settings.set('accessToken', token);
       Settings.set('onlyParticipating', onlyParticipating);
 
-      Badge.updateBadge();
+      Badge.update();
       self.close();
     });
 

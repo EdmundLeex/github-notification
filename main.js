@@ -24,18 +24,23 @@
       });
     }
 
+    function updateBadge() {
+      const count = AppCache.count;
+      Badge.update(count);
+    }
+
     function scheduleUpdate(period) {
       chrome.alarms.create({
         periodInMinutes: period
       });
 
       chrome.alarms.onAlarm.addListener(updateCache);
-      chrome.alarms.onAlarm.addListener(Badge.updateBadge);
+      chrome.alarms.onAlarm.addListener(updateBadge);
     }
 
     function init() {
       scheduleUpdate(Settings.get('interval'));
-      updateCache(Badge.updateBadge);
+      updateCache(updateBadge);
     }
 
     init();
