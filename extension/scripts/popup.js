@@ -1,4 +1,4 @@
-(() => {
+;(() => {
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
   const AppCache = GitHubNotifications.AppCache;
   const Util     = GitHubNotifications.Util;

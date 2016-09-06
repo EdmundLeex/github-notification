@@ -1,4 +1,4 @@
-(() => {
+;(() => {
   'use strict';
 
   if (window.GitHubNotifications === undefined) {
