@@ -19,9 +19,11 @@
       Badge.update(count);
     }
 
-    function scheduleUpdate(period) {
+    function scheduleUpdate() {
+      const updateInterval = Settings.get('interval');
+
       chrome.alarms.create({
-        periodInMinutes: period
+        periodInMinutes: updateInterval
       });
 
       chrome.alarms.onAlarm.addListener(Util.updateCache.bind(Util, updateBadge));
@@ -30,7 +32,7 @@
     function init() {
       AppCache.on('APP_CACHE_CHANGE', updateBadge);
 
-      scheduleUpdate(Settings.get('interval'));
+      scheduleUpdate();
       Util.updateCache(Util.handleError);
     }
 
