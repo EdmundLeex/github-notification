@@ -6,7 +6,7 @@
   "homepage_url": "https://github.com/EdmundLeex/github-notification",
   "minimum_chrome_version": "46",
   "icons": {
-    "128": "assets/icon-lg.png"
+    "128": "assets/images/icon-lg.png"
   },
   "permissions": [
     "alarms"
@@ -29,7 +29,7 @@
   },
   "browser_action": {
     "default_icon": {
-      "38": "assets/icon.png"
+      "38": "assets/images/icon.png"
     },
     "default_title": "GitHub Notifications",
     "default_popup": "popup.html"

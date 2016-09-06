@@ -28,7 +28,7 @@
       }
 
       function timeAgo(date) {
-        let units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
+        let units = ['yrs', 'mo', 'days', 'hrs', 'mins', 'sec'];
         let dividents = [31536000, 2592000, 86400, 3600, 60];
         date = new Date(date);
 
