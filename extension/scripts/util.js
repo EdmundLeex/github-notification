@@ -21,9 +21,6 @@
             AppCache.count = notifications.length;
             AppCache.notifications = createNotifications(notifications);
             AppCache.publish('APP_CACHE_CHANGE');
-            // if (callback !== undefined && callback.constructor === Function) {
-            //   callback();
-            // };
           })
         }).catch(errorHandler);
       }
