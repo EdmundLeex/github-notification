@@ -12,15 +12,22 @@
     var instance;
 
     function init() {
-      function render(text) {
+      function render(text, title) {
         chrome.browserAction.setBadgeText({text: String(text)});
         chrome.browserAction.setBadgeBackgroundColor({color: [166, 41, 41, 255]});
-        chrome.browserAction.setTitle({title: `${text} unread notifications`});
+        chrome.browserAction.setTitle({title: title});
       }
 
       function update(text) {
+        let title;
         if (text === 0 || text === undefined) { text = ''; }
-        render(text);
+        if (text === '!') {
+          title = 'Click me for more info.';
+        } else {
+          title = `${text} unread notifications`;
+        }
+
+        render(text, title);
       }
 
       return {
