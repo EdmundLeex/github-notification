@@ -18,12 +18,25 @@
     if (Settings.get('accessToken') === '') {
       renderSetting();
     } else if (notifications) {
-      const groups = _groupNotifications(notifications);
-      divContainer.innerHTML = '';
-      divContainer.appendChild(_groupsNode(groups));
+      renderNotifications(notifications);
     } else {
       renderSpinner();
     }
+  }
+
+  function renderNotifications(notifications) {
+    const isEmpty = _isEmpty(notifications);
+    let content;
+    if (isEmpty) {
+      content = document.createElement('div');
+      content.classList.add('center');
+      content.textContent = 'Congrats! You are all caught up.'
+    } else {
+      const groups = _groupNotifications(notifications);
+      content = _groupsNode(groups);
+    }
+    divContainer.innerHTML = '';
+    divContainer.appendChild(content);
   }
 
   function renderSpinner() {
@@ -146,6 +159,13 @@
     xmlhttp.open("GET", href, false);
     xmlhttp.send();
     return xmlhttp.responseText;
+  }
+
+  function _isEmpty(notifications) {
+    for (var key in notifications) {
+      if (hasOwnProperty.call(notifications, key)) return false;
+    }
+    return true;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
