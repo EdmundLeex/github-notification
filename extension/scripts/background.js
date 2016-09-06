@@ -26,14 +26,14 @@
         periodInMinutes: updateInterval
       });
 
-      chrome.alarms.onAlarm.addListener(Util.updateCache.bind(Util, updateBadge));
+      chrome.alarms.onAlarm.addListener(Util.updateCache);
     }
 
     function init() {
       AppCache.on('APP_CACHE_CHANGE', updateBadge);
 
       scheduleUpdate();
-      Util.updateCache(Util.handleError);
+      Util.updateCache();
     }
 
     init();

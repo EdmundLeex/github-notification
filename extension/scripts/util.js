@@ -16,6 +16,8 @@
 
     function init() {
       function updateCache(errorHandler) {
+        if (errorHandler === undefined) errorHandler = handleError;
+
         Api.getNotifications().then(response => {
           response.json().then(notifications => {
             AppCache.count = notifications.length;
