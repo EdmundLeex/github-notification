@@ -15,7 +15,7 @@
     var instance;
 
     function init() {
-      function updateCache(handleError) {
+      function updateCache(errorHandler) {
         Api.getNotifications().then(response => {
           response.json().then(notifications => {
             AppCache.count = notifications.length;
@@ -25,7 +25,7 @@
             //   callback();
             // };
           })
-        }).catch(handleError);
+        }).catch(errorHandler);
       }
 
       function timeAgo(date) {
