@@ -41,6 +41,8 @@
     divContainer.appendChild(divTitle);
     divContainer.appendChild(link);
     link.addEventListener('click', _openSettings);
+    // const optionPage = loadPage('options.html');
+    // divContainer.innerHTML = optionPage;
   }
 
   function renderError() {
@@ -137,6 +139,13 @@
     }
 
     return notificationsByGroup;
+  }
+
+  function loadPage(href) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", href, false);
+    xmlhttp.send();
+    return xmlhttp.responseText;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
