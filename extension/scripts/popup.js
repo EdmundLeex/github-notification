@@ -8,7 +8,7 @@
   const divContainer = document.getElementById('container');
   const spinner = document.createElement('img');
   spinner.classList.add('spinner');
-  spinner.src = 'loading.gif';
+  spinner.src = 'assets/loading.gif';
 
   function renderPopup() {
     Util.updateCache(Badge.update.bind(Badge, AppCache.count, renderError));
