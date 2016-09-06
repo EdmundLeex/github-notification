@@ -64,7 +64,7 @@
 
   function _openSettings(e) {
     const appId = Settings.get('appId');
-    const url = `chrome://extensions/?id=${appId}`;
+    const url = `chrome://extensions/?options=${appId}`;
 
     chrome.tabs.create({'url': url});
   }
