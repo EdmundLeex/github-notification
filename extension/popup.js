@@ -16,15 +16,7 @@
     const notifications = AppCache.notifications;
 
     if (Settings.get('accessToken') === '') {
-      const divTitle = document.createElement('div');
-      const link = document.createElement('a');
-      link.text = 'Settings';
-      link.classList.add('center');
-      divTitle.classList.add('center');
-      divTitle.textContent = 'Please click here to add your Github access token.';
-      divContainer.appendChild(divTitle);
-      divContainer.appendChild(link);
-      link.addEventListener('click', _openSettings);
+      renderSetting();
     } else if (notifications) {
       const groups = _groupNotifications(notifications);
       divContainer.innerHTML = '';
@@ -39,15 +31,23 @@
     divContainer.appendChild(spinner);
   }
 
-  function renderError(e) {
-    if (e.message === 'missing token') {
-      
-    }
+  function renderSetting() {
+    const divTitle = document.createElement('div');
+    const link = document.createElement('a');
+    link.text = 'Settings';
+    link.classList.add('center');
+    divTitle.classList.add('center');
+    divTitle.textContent = 'Please click here to add your Github access token.';
+    divContainer.appendChild(divTitle);
+    divContainer.appendChild(link);
+    link.addEventListener('click', _openSettings);
+  }
+
+  function renderError() {
+
   }
 
   function _openSettings(e) {
-    // e.preventDefault();
-
     const appId = Settings.get('appId');
     const url = `chrome://extensions/?id=${appId}`;
 
@@ -95,6 +95,7 @@
     link.href = notification.url;
     link.target = '_blank';
     itemDiv.classList.add('row');
+    itemDiv.dataset.id = notification.id;
 
     link.appendChild(itemDiv);
     itemDiv.appendChild(_titleNode(notification));
@@ -125,14 +126,15 @@
 
   function _groupNotifications(notifications) {
     let notificationsByGroup = {};
-    notifications.forEach(notification => {
+    for (id in notifications) {
+      const notification = notifications[id];
       const groupName = notification.fullName;
       if (notificationsByGroup[groupName] === undefined) {
         notificationsByGroup[groupName] = [];
       }
 
       notificationsByGroup[groupName].push(notification);
-    });
+    }
 
     return notificationsByGroup;
   }
