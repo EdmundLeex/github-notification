@@ -18,6 +18,7 @@
   "background": {
     "persistent": true,
     "scripts": [
+      "scripts/publisher.js",
       "scripts/notification.js",
       "scripts/app_cache.js",
       "scripts/badge.js",

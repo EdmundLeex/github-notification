@@ -15,14 +15,15 @@
     var instance;
 
     function init() {
-      function updateCache(callback, handleError) {
+      function updateCache(handleError) {
         Api.getNotifications().then(response => {
           response.json().then(notifications => {
             AppCache.count = notifications.length;
             AppCache.notifications = createNotifications(notifications);
-            if (callback !== undefined && callback.constructor === Function) {
-              callback();
-            };
+            AppCache.publish('APP_CACHE_CHANGE');
+            // if (callback !== undefined && callback.constructor === Function) {
+            //   callback();
+            // };
           })
         }).catch(handleError);
       }

@@ -28,8 +28,10 @@
     }
 
     function init() {
+      AppCache.on('APP_CACHE_CHANGE', updateBadge);
+
       scheduleUpdate(Settings.get('interval'));
-      Util.updateCache(updateBadge, Util.handleError);
+      Util.updateCache(Util.handleError);
     }
 
     init();
