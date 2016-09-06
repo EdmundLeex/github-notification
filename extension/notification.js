@@ -8,6 +8,7 @@
   let GitHubNotifications = window.GitHubNotifications;
 
   function _Notification(params) {
+    this.id = params.id;
     this.title = params.subject.title;
     this.type = params.subject.type;
     this.timeStamp = params.updated_at;
