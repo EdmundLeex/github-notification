@@ -6,6 +6,7 @@
   }
 
   let GitHubNotifications = window.GitHubNotifications;
+  let Publisher = GitHubNotifications.Publisher;
 
   const AppCache = (() => {
     var instance;
@@ -19,6 +20,9 @@
         if (!instance) {
           instance = init();
         }
+
+        Object.assign(instance, Publisher);
+
         return instance;
       }
     }
