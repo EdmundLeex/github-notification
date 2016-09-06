@@ -51,12 +51,12 @@
       }
 
       function createNotifications(notifications) {
-        let notificationsArr = [];
+        let notificationsHash = {};
         notifications.forEach(notification => {
-          notificationsArr.push(Notification(notification));
+          notificationsHash[notification.id] = Notification(notification);
         });
 
-        return notificationsArr;
+        return notificationsHash;
       }
 
       function handleError() {
