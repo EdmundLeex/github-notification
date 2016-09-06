@@ -72,7 +72,7 @@
   function _groupsNode(groups) {
     const divGroups = document.createElement('div');
 
-    for (groupName in groups) {
+    for (var groupName in groups) {
       const divGroup = _groupNode(groupName, groups[groupName]);
       divGroups.appendChild(divGroup);
     }
@@ -141,7 +141,7 @@
 
   function _groupNotifications(notifications) {
     let notificationsByGroup = {};
-    for (id in notifications) {
+    for (var id in notifications) {
       const notification = notifications[id];
       const groupName = notification.fullName;
       if (notificationsByGroup[groupName] === undefined) {
