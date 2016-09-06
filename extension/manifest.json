@@ -19,7 +19,7 @@
     "persistent": true,
     "scripts": [
       "scripts/notification.js",
-      "scripts/cache.js",
+      "scripts/app_cache.js",
       "scripts/badge.js",
       "scripts/settings.js",
       "scripts/api.js",
