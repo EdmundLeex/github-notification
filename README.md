@@ -12,6 +12,9 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 ### Simple configuration:
 ![setting]
 
+### Notifications
+![notification]
+
 ## Todos
 - [ ] Optimize data flow
 - [ ] Add test
@@ -19,3 +22,4 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 [fullscreen]: screenshots/fullscreen-1.png
 [popup]: screenshots/popup.png
 [setting]: screenshots/setting.jpg
+[notification]: screenshots/notification.png
