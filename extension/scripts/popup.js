@@ -2,7 +2,6 @@
   const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
   const AppCache = GitHubNotifications.AppCache;
   const Util     = GitHubNotifications.Util;
-  const Badge    = GitHubNotifications.Badge;
   const Settings = GitHubNotifications.Settings;
 
   const divContainer = document.getElementById('container');
@@ -11,8 +10,6 @@
   spinner.src = 'assets/images/loading.gif';
 
   function renderPopup() {
-    Util.updateCache(Badge.update.bind(Badge, AppCache.get('count'), renderError));
-
     const notifications = AppCache.get('notifications');
 
     if (Settings.get('accessToken') === '') {
