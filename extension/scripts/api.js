@@ -12,8 +12,6 @@
     var instance;
 
     function init() {
-      let lastRequest;
-
       function getNotifications() {
         const token = Settings.get('accessToken');
         const onlyParticipating = Settings.get('onlyParticipating');
@@ -37,10 +35,8 @@
         }
         const headers = {
           Authorization: `token ${token}`,
-          'If-Modified-Since': lastRequest || ''
+          'If-Modified-Since': ''
         };
-
-        lastRequest = (new Date()).toGMTString();
 
         return fetch(url, {headers});
       }

@@ -30,7 +30,7 @@
           iconUrl: 'assets/images/icon-lg.png',
           title: notification.fullName,
           message: notification.title
-        }, function(notificationId) {});
+        });
       }
     }
 
@@ -48,6 +48,11 @@
       AppCache.on('APP_CACHE_CHANGE', updateBadge);
       AppCache.on('APP_CACHE_CHANGE', prompNotifier);
       Settings.on('SETTINGS_CHANGE', Util.updateCache);
+
+      chrome.notifications.onClicked.addListener((id) => {
+        const notification = AppCache.get('notifications')[id];
+        chrome.tabs.create({ url: notification.url });
+      });
 
       scheduleUpdate();
       Util.updateCache();

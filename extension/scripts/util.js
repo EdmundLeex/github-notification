@@ -17,12 +17,9 @@
     function init() {
       function updateCache(errorHandler) {
         if (errorHandler === undefined) errorHandler = handleError;
-        console.log('updating');
+
         Api.getNotifications().then(response => {
-          console.log('got response');
-          if (response.status === 304) return;
           response.json().then(notifications => {
-            console.log('parsed json');
             const oldNotifications = AppCache.get('notifications');
             const newNotifications = findNewNotifications(oldNotifications, notifications);
 
@@ -79,7 +76,7 @@
         } else {
           newNotifications.forEach(notification => {
             if (!oldNotifications[notification.id]) {
-              newOnes.push(notification);
+              newOnes.push(Notification(notification));
             }
           });
         }
