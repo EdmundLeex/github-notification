@@ -17,6 +17,23 @@
       Badge.update(count);
     }
 
+    function prompNotifier() {
+      let newNotifications = AppCache.get('newNotifications');
+
+      if (!newNotifications) return;
+
+      while (newNotifications.length) {
+        const notification = newNotifications.pop();
+
+        chrome.notifications.create(notification.id, {
+          type: 'basic',
+          iconUrl: 'assets/images/icon-lg.png',
+          title: notification.fullName,
+          message: notification.title
+        }, function(notificationId) {});
+      }
+    }
+
     function scheduleUpdate() {
       const updateInterval = Settings.get('interval');
 
@@ -29,6 +46,7 @@
 
     function init() {
       AppCache.on('APP_CACHE_CHANGE', updateBadge);
+      AppCache.on('APP_CACHE_CHANGE', prompNotifier);
       Settings.on('SETTINGS_CHANGE', Util.updateCache);
 
       scheduleUpdate();

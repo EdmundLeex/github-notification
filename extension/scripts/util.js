@@ -23,6 +23,10 @@
           if (response.status === 304) return;
           response.json().then(notifications => {
             console.log('parsed json');
+            const oldNotifications = AppCache.get('notifications');
+            const newNotifications = findNewNotifications(oldNotifications, notifications);
+
+            AppCache.set('newNotifications', newNotifications);
             AppCache.set('count', notifications.length);
             AppCache.set('notifications', createNotifications(notifications));
           })
@@ -43,7 +47,7 @@
             interval = Math.floor(seconds / dividents.shift());
           }
           if (interval !== interval) {
-            return Math.floor(seconds) + " seconds";
+            return `${Math.floor(seconds)} ${units.shift()}`;
           } else {
             return `${interval} ${units.shift()}`;
           }
@@ -63,6 +67,24 @@
 
       function handleError() {
         AppCache.clear();
+      }
+
+      function findNewNotifications(oldNotifications, newNotifications) {
+        let newOnes = [];
+
+        if (!oldNotifications) {
+          newNotifications.forEach(notification => {
+            newOnes.push(Notification(notification));
+          });
+        } else {
+          newNotifications.forEach(notification => {
+            if (!oldNotifications[notification.id]) {
+              newOnes.push(notification);
+            }
+          });
+        }
+
+        return newOnes;
       }
 
       return {
