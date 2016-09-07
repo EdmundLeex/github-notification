@@ -6,7 +6,6 @@
   }
 
   let GitHubNotifications = window.GitHubNotifications;
-  const AppCache = GitHubNotifications.AppCache;
   const Settings = GitHubNotifications.Settings;
 
   const Api = (() => {
@@ -14,22 +13,23 @@
 
     function init() {
       function getNotifications() {
-        const query = queryString();
+        const token = Settings.get('accessToken');
+        const onlyParticipating = Settings.get('onlyParticipating');
+        const query = queryString(onlyParticipating);
         const url = `${Settings.get('baseUrl')}?${query}`;
 
-        return request(url);
+        return request(url, token);
       }
 
-      function queryString() {
+      function queryString(onlyParticipating) {
         let query = [];
-        if (Settings.get('onlyParticipating')) {
+        if (onlyParticipating) {
           query.push('participating=true');
         }
         return query.join('&');
       }
 
-      function request(url) {
-        const token = Settings.get('accessToken');
+      function request(url, token) {
         if (!token) {
           return Promise.reject(new Error('missing token'));
         }
