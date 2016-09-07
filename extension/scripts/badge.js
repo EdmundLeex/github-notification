@@ -6,7 +6,6 @@
   }
 
   let GitHubNotifications = window.GitHubNotifications;
-  const AppCache = GitHubNotifications.AppCache;
 
   const Badge = (() => {
     var instance;
@@ -20,13 +19,13 @@
 
       function update(text) {
         let title;
-        if (text === 0 || text === undefined) { text = ''; }
         if (text === '!') {
           title = 'Click me for more info.';
         } else {
           title = `${text} unread notifications`;
         }
 
+        if (text === 0) text = ''; 
         render(text, title);
       }
 

@@ -9,14 +9,12 @@
     const GitHubNotifications = window.GitHubNotifications;
     const Badge = GitHubNotifications.Badge;
     const Settings = GitHubNotifications.Settings;
-    // const Api = GitHubNotifications.Api;
     const AppCache = GitHubNotifications.AppCache;
-    // const Notification = GitHubNotifications.Notification;
     const Util = GitHubNotifications.Util;
 
     function updateBadge() {
       const count = AppCache.get('count');
-      Badge.update(count);
+      Badge.update(count || '!');
     }
 
     function scheduleUpdate() {
