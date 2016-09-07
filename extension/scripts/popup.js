@@ -110,10 +110,26 @@
     itemDiv.dataset.id = notification.id;
 
     link.appendChild(itemDiv);
+    itemDiv.appendChild(_iconNode(notification));
     itemDiv.appendChild(_titleNode(notification));
     itemDiv.appendChild(_timeNode(notification));
 
     return link;
+  }
+
+  function _iconNode(notification) {
+    const container = document.createElement('div');
+    const iconImg = document.createElement('img');
+    container.classList.add('icon');
+    container.appendChild(iconImg);
+
+    if (notification.type === 'PullRequest') {
+      iconImg.src = 'assets/images/pr.png';
+    } else if (notification.type === 'Issue') {
+      iconImg.src = 'assets/images/issue.png';
+    }
+
+    return container;
   }
 
   function _titleNode(notification) {
