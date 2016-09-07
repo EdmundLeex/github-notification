@@ -51,6 +51,7 @@
 
       chrome.notifications.onClicked.addListener((id) => {
         const notification = AppCache.get('notifications')[id];
+        Util.markRead(notification);
         chrome.tabs.create({ url: notification.url });
       });
 

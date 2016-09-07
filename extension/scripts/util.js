@@ -81,9 +81,18 @@
         return newOnes;
       }
 
+      function markRead(notification) {
+        const notifications = AppCache.get('notifications');
+        const count = AppCache.get('count');
+
+        delete notifications[notification.id];
+        AppCache.set('count', count - 1);
+      }
+
       return {
         updateCache: updateCache,
-        timeAgo: timeAgo
+        timeAgo: timeAgo,
+        markRead: markRead
       };
     }
 

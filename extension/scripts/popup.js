@@ -193,14 +193,11 @@
     document.getElementById('container').addEventListener('click', e => {
       const row = findRowNode(e.target);
       if (row === null) return;
-
       const notifications = AppCache.get('notifications');
       const notificationId = row.dataset.id;
       const notification = notifications[notificationId];
-      let count = AppCache.get('count');
 
-      delete notifications[notificationId];
-      AppCache.set('count', --count);
+      Util.markRead(notification);
 
       chrome.tabs.create({ url: notification.url });
     });
