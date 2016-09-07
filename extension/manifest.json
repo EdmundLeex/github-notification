@@ -9,8 +9,10 @@
     "128": "assets/images/icon-lg.png"
   },
   "permissions": [
-    "alarms",
     "notifications",
+    "alarms"
+  ],
+  "optional_permissions": [
     "tabs"
   ],
   "background": {
