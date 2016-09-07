@@ -14,10 +14,7 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 
 ## Todos
 
-- [ ] Change Badge to use observer pattern
 - [ ] Add popup notifications
-- [ ] Fix Badge update after save option
-- [ ] Fix Badge update after click link from popup
 - [ ] Add test
 
 [fullscreen]: screenshots/fullscreen-1.png
