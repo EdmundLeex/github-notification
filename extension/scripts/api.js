@@ -12,6 +12,8 @@
     var instance;
 
     function init() {
+      let lastRequest;
+
       function getNotifications() {
         const token = Settings.get('accessToken');
         const onlyParticipating = Settings.get('onlyParticipating');
@@ -33,11 +35,12 @@
         if (!token) {
           return Promise.reject(new Error('missing token'));
         }
-
-        const headers = Object.assign({
+        const headers = {
           Authorization: `token ${token}`,
-          'If-Modified-Since': ''
-        });
+          'If-Modified-Since': lastRequest || ''
+        };
+
+        lastRequest = (new Date()).toGMTString();
 
         return fetch(url, {headers});
       }

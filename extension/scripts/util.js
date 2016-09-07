@@ -17,9 +17,12 @@
     function init() {
       function updateCache(errorHandler) {
         if (errorHandler === undefined) errorHandler = handleError;
-
+        console.log('updating');
         Api.getNotifications().then(response => {
+          console.log('got response');
+          if (response.status === 304) return;
           response.json().then(notifications => {
+            console.log('parsed json');
             AppCache.set('count', notifications.length);
             AppCache.set('notifications', createNotifications(notifications));
           })
