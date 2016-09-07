@@ -14,7 +14,7 @@
 
     function updateBadge() {
       const count = AppCache.get('count');
-      Badge.update(count || '!');
+      Badge.update(count);
     }
 
     function scheduleUpdate() {

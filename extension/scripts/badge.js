@@ -19,7 +19,8 @@
 
       function update(text) {
         let title;
-        if (text === '!') {
+        if (text === undefined) {
+          text = '!';
           title = 'Click me for more info.';
         } else {
           title = `${text} unread notifications`;

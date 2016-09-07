@@ -60,7 +60,6 @@
 
       function handleError() {
         AppCache.clear();
-        Badge.update('!');
       }
 
       return {
