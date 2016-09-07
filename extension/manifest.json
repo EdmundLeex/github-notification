@@ -9,11 +9,9 @@
     "128": "assets/images/icon-lg.png"
   },
   "permissions": [
-    "alarms"
-  ],
-  "optional_permissions": [
-    "tabs",
-    "notifications"
+    "alarms",
+    "notifications",
+    "tabs"
   ],
   "background": {
     "persistent": true,
