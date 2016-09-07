@@ -31,23 +31,20 @@
       }
 
       function timeAgo(date) {
-        let units = ['yrs', 'mo', 'days', 'hrs', 'mins', 'sec'];
+        let units = ['yr', 'mo', 'day', 'hr', 'min', 'sec'];
         let dividents = [31536000, 2592000, 86400, 3600, 60];
         date = new Date(date);
 
         var seconds = Math.floor((new Date() - date) / 1000);
         var interval = Math.floor(seconds / dividents.shift());
-
         function _timeSince() {
-          while (interval <= 1) {
+          while (interval < 1) {
             units.shift();
             interval = Math.floor(seconds / dividents.shift());
           }
-          if (interval !== interval) {
-            return `${Math.floor(seconds)} ${units.shift()}`;
-          } else {
-            return `${interval} ${units.shift()}`;
-          }
+          let unit = units.shift();
+          if (interval > 1) unit = `${unit}s`;
+          return `${interval} ${unit}`;
         }
 
         return `${_timeSince()} ago`;
