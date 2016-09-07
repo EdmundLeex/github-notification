@@ -24,9 +24,16 @@
         return appCache[name];
       }
 
+      function clear() {
+        appCache = {};
+        instance.publish('APP_CACHE_CHANGE');
+        return true;
+      }
+
       return {
         set: set,
-        get: get
+        get: get,
+        clear: clear
       };
     }
 
