@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GitHub Notifications",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Displays your GitHub notifications",
   "homepage_url": "https://github.com/EdmundLeex/github-notification",
   "minimum_chrome_version": "46",
