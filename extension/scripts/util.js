@@ -59,13 +59,13 @@
       }
 
       function handleError() {
+        AppCache.clear();
         Badge.update('!');
       }
 
       return {
         updateCache: updateCache,
-        timeAgo: timeAgo,
-        handleError: handleError
+        timeAgo: timeAgo
       };
     }
 
