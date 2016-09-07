@@ -12,7 +12,22 @@
     var instance;
 
     function init() {
-      return {}
+      let appCache = {};
+
+      function set(name, val) {
+        appCache[name] = val;
+        instance.publish('APP_CACHE_CHANGE');
+        return val;
+      }
+
+      function get(name) {
+        return appCache[name];
+      }
+
+      return {
+        set: set,
+        get: get
+      };
     }
 
     return {

@@ -20,9 +20,8 @@
 
         Api.getNotifications().then(response => {
           response.json().then(notifications => {
-            AppCache.count = notifications.length;
-            AppCache.notifications = createNotifications(notifications);
-            AppCache.publish('APP_CACHE_CHANGE');
+            AppCache.set('count', notifications.length);
+            AppCache.set('notifications', createNotifications(notifications));
           })
         }).catch(errorHandler);
       }

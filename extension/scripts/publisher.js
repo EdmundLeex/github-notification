@@ -26,7 +26,7 @@
       function publish(evt) {
         const events = subscribers[evt];
         events.forEach(fn => {
-          fn.call(this);
+          fn.call();
         });
       }
 

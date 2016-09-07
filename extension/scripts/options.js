@@ -30,7 +30,7 @@
       Settings.set('accessToken', token);
       Settings.set('onlyParticipating', onlyParticipating);
 
-      Util.updateCache(Badge.update.bind(Badge, AppCache.count, Util.handleError));
+      Util.updateCache(Badge.update.bind(Badge, AppCache.get('count'), Util.handleError));
       self.close();
     });
 
@@ -48,7 +48,7 @@
       localStorage.clear();
       formSettings.value
 
-      Util.updateCache(Badge.update.bind(Badge, AppCache.count, Util.handleError));
+      Util.updateCache(Badge.update.bind(Badge, AppCache.get('count'), Util.handleError));
     });
   });
 })();

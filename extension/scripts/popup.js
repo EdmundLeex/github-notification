@@ -11,9 +11,9 @@
   spinner.src = 'assets/images/loading.gif';
 
   function renderPopup() {
-    Util.updateCache(Badge.update.bind(Badge, AppCache.count, renderError));
+    Util.updateCache(Badge.update.bind(Badge, AppCache.get('count'), renderError));
 
-    const notifications = AppCache.notifications;
+    const notifications = AppCache.get('notifications');
 
     if (Settings.get('accessToken') === '') {
       renderSetting();
