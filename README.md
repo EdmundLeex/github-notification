@@ -14,6 +14,7 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 
 ## Todos
 
+- [ ] Add icons to popup to show notification types
 - [ ] Add popup notifications
 - [ ] Add test
 
