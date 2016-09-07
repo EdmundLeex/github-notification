@@ -16,6 +16,7 @@
         baseUrl: 'https://api.github.com/notifications',
         accessToken: '',
         onlyParticipating: true,
+        notificationsEnabled: true,
         interval: 1,
         appId: chrome.runtime.id
       };

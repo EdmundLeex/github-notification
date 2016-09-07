@@ -18,6 +18,7 @@
     }
 
     function prompNotifier() {
+      if (!Settings.get('notificationsEnabled')) return;
       let newNotifications = AppCache.get('newNotifications');
 
       if (!newNotifications) return;
