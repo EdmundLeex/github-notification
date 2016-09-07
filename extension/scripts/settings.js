@@ -6,6 +6,7 @@
   }
 
   let GitHubNotifications = window.GitHubNotifications;
+  let Publisher = GitHubNotifications.Publisher;
 
   const Settings = (() => {
     var instance;
@@ -29,12 +30,17 @@
             return value;
           }
         },
-        set:    localStorage.setItem.bind(localStorage),
+        set: (name, val) => {
+          localStorage.setItem(name, val);
+          instance.publish('SETTINGS_CHANGE');
+          return val;
+        },
+        reset: () => {
+          localStorage.clear();
+          instance.publish('SETTINGS_CHANGE');
+        },
         remove: localStorage.removeItem.bind(localStorage),
-        reset:  localStorage.clear.bind(localStorage)
       };
-
-      Object.assign(settings, { defaults: defaults });
 
       return settings;
     }
@@ -44,6 +50,9 @@
         if (!instance) {
           instance = init();
         }
+
+        Object.assign(instance, Publisher);
+
         return instance;
       }
     };
