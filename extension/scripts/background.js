@@ -31,6 +31,7 @@
 
     function init() {
       AppCache.on('APP_CACHE_CHANGE', updateBadge);
+      Settings.on('SETTINGS_CHANGE', Util.updateCache);
 
       scheduleUpdate();
       Util.updateCache();
