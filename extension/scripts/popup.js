@@ -1,5 +1,6 @@
 ;(() => {
-  const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
+  const bg = chrome.extension.getBackgroundPage();
+  const GitHubNotifications = bg.GitHubNotifications;
   const AppCache = GitHubNotifications.AppCache;
   const Util     = GitHubNotifications.Util;
   const Settings = GitHubNotifications.Settings;
@@ -102,19 +103,19 @@
   }
 
   function _notificationItemNode(notification) {
-    const link = document.createElement('a');
+    // const link = document.createElement('a');
     const itemDiv = document.createElement('div');
-    link.href = notification.url;
-    link.target = '_blank';
+    // link.href = notification.url;
+    // link.target = '_blank';
     itemDiv.classList.add('row');
     itemDiv.dataset.id = notification.id;
 
-    link.appendChild(itemDiv);
+    // link.appendChild(itemDiv);
     itemDiv.appendChild(_iconNode(notification));
     itemDiv.appendChild(_titleNode(notification));
     itemDiv.appendChild(_timeNode(notification));
 
-    return link;
+    return itemDiv;
   }
 
   function _iconNode(notification) {
@@ -183,5 +184,25 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     renderPopup();
+
+    function findRowNode(node) {
+      if (node === null || node.className === 'row') return node;
+      return findRowNode(node.parentNode);
+    }
+
+    document.getElementById('container').addEventListener('click', e => {
+      const row = findRowNode(e.target);
+      if (row === null) return;
+
+      const notifications = AppCache.get('notifications');
+      const notificationId = row.dataset.id;
+      const notification = notifications[notificationId];
+      let count = AppCache.get('count');
+
+      delete notifications[notificationId];
+      AppCache.set('count', --count);
+
+      chrome.tabs.create({ url: notification.url });
+    });
   });
 })();

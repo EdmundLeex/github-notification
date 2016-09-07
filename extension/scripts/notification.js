@@ -18,7 +18,9 @@
   }
 
   function parseUrl(url) {
-    url = url.replace('api.', '').replace('/repos', '');
+    url = url.replace('api.', '')
+             .replace('/repos', '')
+             .replace('pulls', 'pull');
     return url;
   }
 

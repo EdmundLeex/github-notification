@@ -31,8 +31,8 @@
       }
 
       return {
-        set: set,
-        get: get,
+        set:   set,
+        get:   get,
         clear: clear
       };
     }
