@@ -5,6 +5,7 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 ## Screen Shots
 ### Show clickable notifications:
 ![fullscreen]
+![fullscreen-1]
 
 ### Pop up
 ![popup]
@@ -13,13 +14,16 @@ A Chrome extension for Github notifications. It will show you the count of unrea
 ![setting]
 
 ### Notifications
+![notifications-fullscreen]
 ![notification]
 
 ## Todos
-- [ ] Optimize data flow
-- [ ] Add test
+- [ ]Optimize data flow
+- [ ]Add test
 
-[fullscreen]: screenshots/fullscreen-1.png
+[fullscreen]: screenshots/fullscreen.png
+[fullscreen-1]: screenshots/fullscreen-1.png
 [popup]: screenshots/popup.png
-[setting]: screenshots/setting.jpg
+[setting]: screenshots/setting.png
 [notification]: screenshots/notification.png
+[notifications-fullscreen]: screenshots/notifications-fullscreen.png
