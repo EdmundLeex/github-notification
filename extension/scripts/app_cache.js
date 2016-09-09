@@ -31,9 +31,9 @@
       }
 
       return {
-        set:   set,
-        get:   get,
-        clear: clear
+        set,
+        get,
+        clear
       };
     }
 

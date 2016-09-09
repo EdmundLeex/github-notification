@@ -16,18 +16,14 @@
 
     function init() {
       function updateCache(errorHandler) {
-        if (errorHandler === undefined) errorHandler = handleError;
+        Api.getNotifications().then(notifications => {
+          const oldNotifications = AppCache.get('notifications');
+          const newNotifications = findNewNotifications(oldNotifications, notifications);
 
-        Api.getNotifications().then(response => {
-          response.json().then(notifications => {
-            const oldNotifications = AppCache.get('notifications');
-            const newNotifications = findNewNotifications(oldNotifications, notifications);
-
-            AppCache.set('newNotifications', newNotifications);
-            AppCache.set('count', notifications.length);
-            AppCache.set('notifications', createNotifications(notifications));
-          })
-        }).catch(errorHandler);
+          AppCache.set('newNotifications', newNotifications);
+          AppCache.set('count', notifications.length);
+          AppCache.set('notifications', createNotifications(notifications));
+        }, errorHandler || handleError);
       }
 
       function timeAgo(date) {
@@ -90,9 +86,9 @@
       }
 
       return {
-        updateCache: updateCache,
-        timeAgo: timeAgo,
-        markRead: markRead
+        updateCache,
+        timeAgo,
+        markRead
       };
     }
 

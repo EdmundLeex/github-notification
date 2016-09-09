@@ -31,7 +31,7 @@
       }
 
       return {
-        update: update
+        update
       };
     }
 

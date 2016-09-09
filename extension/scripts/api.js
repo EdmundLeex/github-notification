@@ -18,7 +18,9 @@
         const query = queryString(onlyParticipating);
         const url = `${Settings.get('baseUrl')}?${query}`;
 
-        return request(url, token);
+        return request(url, token).then(response => {
+          return response.json();
+        });
       }
 
       function queryString(onlyParticipating) {
@@ -42,7 +44,7 @@
       }
 
       return {
-        getNotifications: getNotifications
+        getNotifications
       };
     }
 

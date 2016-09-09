@@ -31,8 +31,8 @@
       }
 
       return {
-        on:      on,
-        publish: publish
+        on,
+        publish
       };
     }
 
