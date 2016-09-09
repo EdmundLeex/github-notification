@@ -15,7 +15,7 @@
     var instance;
 
     function init() {
-      function updateCache(errorHandler) {
+      function updateCache(errorHandler = handleError) {
         Api.getNotifications().then(notifications => {
           const oldNotifications = AppCache.get('notifications');
           const newNotifications = findNewNotifications(oldNotifications, notifications);
@@ -23,7 +23,7 @@
           AppCache.set('newNotifications', newNotifications);
           AppCache.set('count', notifications.length);
           AppCache.set('notifications', createNotifications(notifications));
-        }, errorHandler || handleError);
+        }, errorHandler);
       }
 
       function timeAgo(date) {
