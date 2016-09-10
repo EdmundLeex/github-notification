@@ -123,12 +123,7 @@
     const iconImg = document.createElement('img');
     container.classList.add('icon');
     container.appendChild(iconImg);
-
-    if (notification.type === 'PullRequest') {
-      iconImg.src = 'assets/images/pr.png';
-    } else if (notification.type === 'Issue') {
-      iconImg.src = 'assets/images/issue.png';
-    }
+    iconImg.src = notification.img;
 
     return container;
   }

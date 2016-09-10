@@ -15,6 +15,7 @@
     this.repo = params.repository.name;
     this.fullName = params.repository.full_name;
     this.url = parseUrl(params.subject.url);
+    this.img = `assets/images/${this.type.toLowerCase()}.png`;
   }
 
   function parseUrl(url) {
