@@ -6,6 +6,7 @@
   }
 
   let GitHubNotifications = window.GitHubNotifications;
+  const Settings = GitHubNotifications.Settings;
 
   function _Notification(params) {
     this.id = params.id;
@@ -19,10 +20,16 @@
   }
 
   function parseUrl(url) {
-    url = url.replace('api.', '')
-             .replace('/repos', '')
-             .replace('pulls', 'pull');
-    return url;
+    var newUrl = url.slice();
+    if (Settings.get('githubEnterpriseEnabled')) {
+      newUrl = newUrl.replace('/api/v3', '');
+    } else {
+      newUrl = newUrl.replace('api.', '');
+    }
+    newUrl = newUrl.replace('/repos', '')
+                   .replace('pulls', 'pull');
+
+    return newUrl;
   }
 
   const Notification = (params) => {

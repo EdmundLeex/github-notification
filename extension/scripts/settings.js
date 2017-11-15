@@ -14,6 +14,7 @@
     function init() {
       const defaults = {
         baseUrl: 'https://api.github.com/notifications',
+        // baseUrl: 'https://github.groupondev.com/api/v3/notifications',
         accessToken: '',
         onlyParticipating: true,
         notificationsEnabled: true,

@@ -19,10 +19,10 @@
     "persistent": true,
     "scripts": [
       "scripts/publisher.js",
+      "scripts/settings.js",
       "scripts/notification.js",
       "scripts/app_cache.js",
       "scripts/badge.js",
-      "scripts/settings.js",
       "scripts/api.js",
       "scripts/util.js",
       "scripts/background.js"

@@ -16,7 +16,13 @@
         const token = Settings.get('accessToken');
         const onlyParticipating = Settings.get('onlyParticipating');
         const query = queryString(onlyParticipating);
-        const url = `${Settings.get('baseUrl')}?${query}`;
+        const baseUrl = Settings.get('baseUrl');
+        let url;
+        if (Settings.get('githubEnterpriseEnabled')) {
+          url = `${baseUrl}/api/v3/notifications?${query}`;
+        } else {
+          url = `${Settings.get('baseUrl')}?${query}`;
+        }
 
         return request(url, token).then(response => {
           return response.json();

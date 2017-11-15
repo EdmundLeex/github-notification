@@ -8,6 +8,18 @@
   <body>
     <form id="form-settings" action="#">
       <section>
+        <h3>Host Config</h3>
+        <input type="checkbox" id="github-enterprise-enabled">
+        <label for="github-enterprise">Github Enterprise</label>
+        <div id="github-enterprise-url-group">
+          <input type="text" id="github-enterprise-url">
+          <span class="description">
+            The full URL.<br/>
+            e.g.: https://github.your-company-url.com
+          </span><br />
+        </div>
+      </section>
+      <section>
         <h3>API Access</h3>
         <label for="access-token">Access Token</label>
         <input type="text" id="access-token">
