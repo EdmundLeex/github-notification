@@ -5,6 +5,8 @@
     const GitHubNotifications = chrome.extension.getBackgroundPage().GitHubNotifications;
     const Settings = GitHubNotifications.Settings;
 
+    const ENTERPRISE_URL_REGEX = /^https:\/\/github\.\w+\.com/;
+
     const formSettings = document.getElementById('form-settings');
     const btnCancel = document.getElementById('btn-cancel');
     const btnReset = document.getElementById('btn-reset');
@@ -14,6 +16,7 @@
     const formGithubEnterpriseEnabled = formSettings.elements.namedItem('github-enterprise-enabled');
     const formGithubEnterpriseUrl = formSettings.elements.namedItem('github-enterprise-url');
     const formGithubEnterpriseUrlGroup = document.getElementById('github-enterprise-url-group');
+    const createTokenATag = document.getElementById('create-token-url');
 
     function showSettings() {
       formAccessToken.value = Settings.get('accessToken');
@@ -32,7 +35,6 @@
     showSettings();
 
     formGithubEnterpriseEnabled.addEventListener('change', (e) => {
-      debugger;
       if (e.currentTarget.checked) {
         formGithubEnterpriseUrlGroup.style.display = 'block';
       } else {
@@ -40,6 +42,29 @@
       }
       formGithubEnterpriseUrl.value = '';
     });
+
+    formGithubEnterpriseUrl.addEventListener('change', (e) => {
+      const matchedUrl = e.currentTarget.value.match(ENTERPRISE_URL_REGEX)
+      if (matchedUrl) {
+        const baseUrl = matchedUrl[0];
+        e.currentTarget.value = baseUrl;
+        createTokenATag.href = createTokenATag.href.replace('https://github.com', baseUrl);
+        debugger;
+      } else {
+        alert('Please enter a valid Github enterprise URL');
+      }
+    });
+
+    // createTokenATag.addEventListener('click', (e) => {
+    //   e.preventDefault();
+    //   const baseUrl = formGithubEnterpriseUrl.value;
+    //   const createTokenUrl = e.currentTarget.href;
+    //   if (baseUrl.match(ENTERPRISE_URL_REGEX)) {
+    //     e.currentTarget.href = createTokenUrl.replace('https://github.com', baseUrl);
+    //   }
+    //   debugger;
+    //   e.currentTarget.click();
+    // });
 
     formSettings.addEventListener('submit', (e) => {
       e.preventDefault();
