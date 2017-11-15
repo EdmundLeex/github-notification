@@ -48,13 +48,18 @@
       const onlyParticipating = formOnlyParticipating.checked;
       const notificationsEnabled = formNotificationsEnabled.checked;
       const githubEnterpriseEnabled = formNotificationsEnabled.checked;
-      const githubEnterpriseUrl = formGithubEnterpriseEnabled.checked ? formGithubEnterpriseUrl.value : '';
+      const githubEnterpriseUrl = formGithubEnterpriseUrl.value;
+
+      if (githubEnterpriseEnabled && githubEnterpriseUrl.trim() !== '') {
+        Settings.set('githubEnterpriseEnabled', true);
+        Settings.set('baseUrl', githubEnterpriseUrl);
+      } else {
+        Settings.set('githubEnterpriseEnabled', false);
+      }
 
       Settings.set('accessToken', token);
       Settings.set('onlyParticipating', onlyParticipating);
       Settings.set('notificationsEnabled', notificationsEnabled);
-      Settings.set('githubEnterpriseEnabled', githubEnterpriseEnabled);
-      Settings.set('baseUrl', githubEnterpriseUrl);
 
       self.close();
     });
