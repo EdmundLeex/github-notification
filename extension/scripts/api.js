@@ -25,7 +25,11 @@
         }
 
         return request(url, token).then(response => {
-          return response.json();
+          if (response.status > 300) {
+            return Promise.reject(new Error(response.statusText));
+          } else {
+            return response.json();
+          }
         });
       }
 

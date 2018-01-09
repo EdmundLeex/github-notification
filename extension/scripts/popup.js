@@ -12,11 +12,14 @@
 
   function renderPopup() {
     const notifications = AppCache.get('notifications');
+    const error = AppCache.get('error');
 
     if (Settings.get('accessToken') === '') {
       renderSetting();
     } else if (notifications) {
       renderNotifications(notifications);
+    } else if (error) {
+      renderError(error);
     } else {
       renderSpinner();
     }
@@ -56,8 +59,16 @@
     // divContainer.innerHTML = optionPage;
   }
 
-  function renderError() {
-
+  function renderError(error) {
+    const divTitle = document.createElement('div');
+    const link = document.createElement('a');
+    link.text = 'Settings';
+    link.classList.add('center');
+    divTitle.classList.add('center');
+    divTitle.textContent = 'Looks like there is some issue with your token. Please click here to regenerate it.';
+    divContainer.appendChild(divTitle);
+    divContainer.appendChild(link);
+    link.addEventListener('click', _openSettings);
   }
 
   function _openSettings(e) {

@@ -20,6 +20,7 @@
           const oldNotifications = AppCache.get('notifications');
           const newNotifications = findNewNotifications(oldNotifications, notifications);
 
+          AppCache.clear();
           AppCache.set('newNotifications', newNotifications);
           AppCache.set('count', notifications.length);
           AppCache.set('notifications', createNotifications(notifications));
@@ -55,8 +56,9 @@
         return notificationsHash;
       }
 
-      function handleError() {
+      function handleError(err) {
         AppCache.clear();
+        AppCache.set('error', err.message);
       }
 
       function findNewNotifications(oldNotifications, newNotifications) {
